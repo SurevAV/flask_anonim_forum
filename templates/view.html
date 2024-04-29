@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Общение обо всем</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/page1.css">
+    <link rel="stylesheet" href="/static/css/page2.css">
+    <link href="/static/images/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="description" content="Анонимный форум." />
+</head>
+
+<body>
+    <script>
+        function reply_click(clicked_id) {
+            var input = document.getElementById('to');
+            if (!input.value.includes(clicked_id)) {
+                input.value = input.value +clicked_id + ' ';
+            }
+        };
+
+        async function main() {
+            while (true) {
+                let response = await fetch("{{url}}");
+                let data = await response.json();
+
+                for (let i = 0; i < 500; i++) {
+                    const element = document.getElementById("reply");
+                    if (element != null){
+                        element.remove();
+                    }
+                    else {
+                        break;
+                    }
+                }
+
+                for (let i = 0; i < data.length; i++) {
+                    var date = data[i]["date"];
+                    var identification = data[i]["identification"];
+                    var text = data[i]["text"];
+                    var reply = data[i]["reply"];
+                    var replies= data[i]["replies"];
+                    var color= data[i]["color"];
+
+                    var string_reply = '<a class="text-from-to">ответ на: </a>';
+                    for (let j= 0; j < reply.length; j++) {
+                        string_reply += `<a href=#${reply[j]} class="text-from-to" >${reply[j]} </a>`;
+                    }
+                    string_reply +="<br><br>";
+
+                    var string_replies = '<a class="text-from-to">ответы: </a>';
+                    for (let j= 0; j < replies.length; j++) {
+                        string_replies += `<a href=#${replies[j]} class="text-from-to" >${replies[j]} </a>`;
+                    }
+                    string_replies +="<br><br>";
+
+                    const selector = document.getElementById('replies');
+                    const block_reply = document.createElement('div');
+
+                    block_reply.setAttribute("id", "reply");
+                    block_reply.setAttribute("style", color);
+
+                    block_reply.innerHTML = `
+                    <div id="${identification}" class="article">
+                    <a class="text-from-to">номер ответа: ${identification}</a>
+                    <br>
+                    <br>
+                    ${string_reply}
+                    <div class="text-article">${text}</div>
+                    <br>
+                    <p class="tab-4"></p>
+                    ${string_replies}
+                    <a class="article-button" onClick="reply_click('${identification}')">ответить</a>
+                    <a class="text-date">дата: ${date}</a>
+                    </div>
+                    <p class="tab-article"></p>`;
+                    selector.appendChild(block_reply);
+                }
+                await new Promise(r => setTimeout(r, 100000));
+            }
+        }
+
+        main();
+    </script>
+
+    <div style="{{article.css}}">
+        <div class="article">
+            <a class="text-title">{{article.title}}</a>
+            <br>
+            <br>
+            <a class="text-article">{{article.text}}</a>
+            <br>
+            <br>
+            <p class="tab-4" ></p>
+            <a class="text-date">дата: {{article.date}}</a>
+        </div>
+    </div>
+    <p class="tab-article" ></p>
+
+    <div id="replies">
+
+    </div>
+    <p class="tab-article" ></p>
+    <div class="container-main">
+        <div class="center">
+            <a class="text-2">Ответить</a>
+        </div>
+        <div class="center">
+        <img src={{captcha_image}} width="200" height="40">
+        </div>
+        <form class="date-select" method="POST">
+            <input  name="panel_input_captcha" class = "panel-input-2" maxlength="250" placeholder = "{{captcha_text}}">
+            <p class="tab-article" ></p>
+            <textarea id="to" name="text_input" class="row-editor" maxlength="5000" placeholder = "Текст ответа(до 5000 символов). Можно использовать >> для цитирования.">{{reply_text}}</textarea>
+            <p class="tab" ></p>
+            <input type="submit" name="click" class="panel-button" value="Отправить">
+        </form>
+    </div>
+</body>
+
+</html>

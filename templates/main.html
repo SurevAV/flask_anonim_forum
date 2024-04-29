@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Общение обо всем</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/page1.css">
+    <link rel="stylesheet" href="/static/css/page2.css">
+    <link href="/static/images/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="description" content="Анонимный форум." />
+</head>
+
+<body>
+    <p class="tab-article" ></p>
+    <div class="container-main">
+        <div class="center">
+            <div class="text-main">{{main_text}}</div>
+        </div>
+        <br>
+
+    </div>
+    <p class="tab-article" ></p>
+
+    <div class="container-main">
+        <div class="center">
+            <a class="text-2">Найти тему</a>
+        </div>
+        <form class="date-select" method="GET">
+            <input  name="panel_input_search" class = "panel-input-2" maxlength="250" placeholder = "Введите имя темы">
+            <p class="tab" ></p>
+            <input type="submit" name="click" class="panel-button" value="Найти">
+        </form>
+    </div>
+    <p class="tab-article" ></p>
+    {% for article in articles %}
+    <div style="{{article.css}}">
+        <div class="article">
+            <a class="text-title">{{article.title}}</a>
+            <br>
+            <br>
+            <div class="text-article">{{article.text}}</div>
+            <br>
+            <br>
+            <p class="tab-4" ></p>
+            <a href={{article.id}} class="article-button">перейти</a>
+            <a class="text-date">дата: {{article.date}} ответов: {{article.count_reply}}</a>
+        </div>
+    </div>
+    <p class="tab-article" ></p>
+    {% endfor %}
+
+    <div class="container-main">
+        <div class="center">
+        {% for href_page in list_pagination %}
+            {% if href_page[1] != page %}
+                <a href={{href_page[0]}} class="page-button">{{href_page[1]}}</a>
+            {% else %}
+                <a href={{href_page[0]}} class="page-button-selected">{{href_page[1]}}</a>
+            {% endif %}
+        {% endfor %}
+        </div>
+        <br>
+    </div>
+    <p class="tab-article" ></p>
+
+    <div class="container-main">
+        <div class="center">
+            <a class="text-2">Создать тему</a>
+        </div>
+        <div class="center">
+        <img src={{captcha_image}} width="200" height="40">
+        </div>
+        <form class="date-select" method="POST" accept-charset="UTF-8" content="text/plain; charset=utf-8">
+            <input  name="panel_input_captcha" class = "panel-input-2" maxlength="250" placeholder = "{{captcha_text}}">
+            <p class="tab-article" ></p>
+            <textarea name="title_input" class="row-editor-2" maxlength="192" placeholder = "Название темы (до 192 символов)">{{article_title}}</textarea>
+            <p class="tab-article" ></p>
+            <textarea name="text_input" class="row-editor" maxlength="5000" placeholder = "Текст темы (до 5000 символов)">{{article_text}}</textarea>
+            <p class="tab" ></p>
+            <input type="submit" name="click" class="panel-button" value="Отправить">
+        </form>
+    </div>
+</body>
+</html>

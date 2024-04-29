@@ -1,0 +1,122 @@
+.date-select{
+margin-left: auto;
+margin-right: auto;
+width: 90%;
+padding: 20px 20px 20px 20px;
+}
+
+.center{
+text-align: center;
+padding: 20px 20px 0px 20px;
+}
+
+.article{
+text-align: left;
+padding: 20px 20px 20px 20px;
+word-break: break-word;
+}
+
+.text-title {
+text-decoration: none;
+font: normal normal 15px/1.5 normal;
+font-family: Arial;
+color: rgb(174 174 234);
+}
+
+
+.text-date {
+position: relative;
+left: 5%;
+text-decoration: none;
+font: normal normal 12px/1.5 normal;
+font-family: Arial;
+color: rgb(204 204 204);
+text-align: right;
+}
+
+.text-article {
+text-decoration: none;
+font: normal normal 14px/1.5 normal;
+font-family: Arial;
+color: rgb(204 204 204);
+text-align: left;
+word-wrap: break-word;
+white-space: pre-line;
+}
+
+.text-main {
+text-decoration: none;
+font: normal normal 14px/1.5 normal;
+font-family: Arial;
+color: rgb(174 200 154);
+text-align: left;
+word-wrap: break-word;
+white-space: pre-line;
+}
+
+.text-from-to {
+text-decoration: none;
+font: normal normal 12px/1.5 normal;
+font-family: Arial;
+color: rgb(150 150 150);
+text-align: left;
+}
+
+.text-2 {
+text-decoration: none;
+font: normal normal 15px/1.5 normal;
+font-family: Arial;
+padding: 20px 2px 20px 10px;
+color: rgb(204 204 204);
+text-align: left;
+}
+
+.row-editor {
+position: relative;
+left: 50%;
+transform: translate(-50%, 0%);
+height: 400px;
+width: 98%;
+border: 1px solid RGB(240, 240, 240);
+padding: 0px 0px 0px 0px;
+background-color: RGB(255, 255, 255);
+font: normal normal 14px/1.5 normal;
+font-family: Arial;
+background-color: rgb(0 0 0);
+color: rgb(204 204 204);
+}
+
+.row-editor-2 {
+position: relative;
+left: 50%;
+transform: translate(-50%, 0%);
+height: 50px;
+width: 98%;
+border: 1px solid RGB(240, 240, 240);
+padding: 0px 0px 0px 0px;
+background-color: RGB(255, 255, 255);
+font: normal normal 14px/1.5 normal;
+font-family: Arial;
+background-color: rgb(0 0 0);
+color: rgb(204 204 204);
+}
+
+textarea[name="text_input"]{
+padding: 10px;
+resize: none;
+outline: none;
+border: none;
+}
+
+textarea[name="title_input"]{
+padding: 10px;
+resize: none;
+outline: none;
+border: none;
+}
+
+
+
+
+
+
